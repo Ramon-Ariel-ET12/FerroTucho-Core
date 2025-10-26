@@ -1,0 +1,35 @@
+﻿@page "/"
+@rendermode InteractiveServer
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<button @onclick="GetWeather">Get Weather</button>
+
+@if (weatherData != null)
+{
+    <p>Location: @weatherData.Location</p>
+    <p>Temperature: @weatherData.Temperature °C</p>
+}
+
+@inject HttpClient Http
+@using Domain
+
+@code {
+    private WeatherData? weatherData;
+
+    private async Task GetWeather()
+    {
+        try
+        {
+            Console.WriteLine("Fetching weather data...");
+            weatherData = await Http.GetFromJsonAsync<WeatherData>("http://localhost:5198/weather/BuenosAires");
+        }
+        catch (Exception ex)
+        {
+            // Handle error
+        }
+    }
+}
