@@ -1,0 +1,31 @@
+name: Front CI
+
+on:
+  push:
+    paths:
+      - 'Front/**'
+      - 'Domain/**'
+      - 'Application/**'
+  pull_request:
+    paths:
+      - 'Front/**'
+      - 'Domain/**'
+      - 'Application/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Restore dependencies
+      run: dotnet restore Front/App/App.csproj
+
+    - name: Build
+      run: dotnet build Front/App/App.csproj --no-restore
