@@ -29,3 +29,6 @@ jobs:
 
     - name: Build
       run: dotnet build Back/Api/Api.csproj --no-restore
+
+    - name: Push 'Back' to sub repo
+      run: git subtree push --prefix=Back https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/Ramon-Ariel-ET12/FerroTucho-Back.git main

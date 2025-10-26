@@ -29,3 +29,6 @@ jobs:
 
     - name: Build
       run: dotnet build Front/App/App.csproj --no-restore
+
+    - name: Push 'Front' to sub repo
+      run: git subtree push --prefix=Front https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/Ramon-Ariel-ET12/FerroTucho-Front.git main
